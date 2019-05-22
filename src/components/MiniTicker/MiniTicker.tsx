@@ -58,9 +58,10 @@ class MiniTicker extends Component<Ticker> {
       miniTicker = <Error error={this.props.error} />;
     } else {
       const lastPrice = this.props.lastPrice || this.props.closePrice;
-      const lastPriceFormatted = utils.formatPrice(lastPrice, +this.props.decimals);
-      const highPriceFormatted = utils.formatPrice(this.props.highPrice, +this.props.decimals);
-      const lowPriceFormatted = utils.formatPrice(this.props.lowPrice, +this.props.decimals);
+      const decimals = +this.props.decimals;
+      const lastPriceFormatted = utils.formatPrice(lastPrice, decimals);
+      const highPriceFormatted = utils.formatPrice(this.props.highPrice, decimals);
+      const lowPriceFormatted = utils.formatPrice(this.props.lowPrice, decimals);
       const volumeFormatted = utils.formatAmount(this.props.quoteVolume);
 
       miniTicker = 
