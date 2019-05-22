@@ -1,4 +1,4 @@
-.miniticker {
+.ticker {
   position: relative;
   display: flex;
   flex-direction: row;
@@ -26,5 +26,5 @@
   padding: 0;
 }
 
-.ask { color: var(--red); }
-.bid { color: var(--green); }
+.ask, .negative { color: var(--red); }
+.bid, .positive { color: var(--green); }

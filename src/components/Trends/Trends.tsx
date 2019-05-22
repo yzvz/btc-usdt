@@ -14,7 +14,7 @@ function mapStateToProps(state: any) {
   return {
     lastPrice: state.tradesReducer.lastPrice,
     isBuyer: state.tradesReducer.isBuyer,
-    closePrice: state.miniTickerReducer.closePrice,
+    closePrice: state.tickerReducer.closePrice,
     decimals: state.commonReducer.decimals
   }
 }

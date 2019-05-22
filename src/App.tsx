@@ -4,18 +4,18 @@ import createSagaMiddleware from 'redux-saga';
 import { Provider } from 'react-redux';
 import OrderBook from './components/OrderBook/OrderBook';
 import RecentTrades from './components/RecentTrades/RecentTrades';
-import MiniTicker from './components/MiniTicker/MiniTicker';
+import Ticker from './components/Ticker/Ticker';
 import tradesReducer from './store/reducers/trades';
 import commonReducer from './store/reducers/common';
-import miniTickerReducer from './store/reducers/miniTicker';
+import tickerReducer from './store/reducers/ticker';
 import orderBookReducer from './store/reducers/orderBook';
-import { watchTrades, watchMiniTicker, watchOrderBook } from './store/sagas';
+import { watchTrades, watchTicker, watchOrderBook } from './store/sagas';
 import './App.css';
 import Loader from './components/Loader/Loader';
 
 const sagaMiddleware = createSagaMiddleware();
 const componseEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const rootReducer = combineReducers({ tradesReducer, miniTickerReducer, commonReducer, orderBookReducer });
+const rootReducer = combineReducers({ tradesReducer, tickerReducer, commonReducer, orderBookReducer });
 
 const store = createStore(rootReducer,
   componseEnhancers(
@@ -24,7 +24,7 @@ const store = createStore(rootReducer,
 );
 
 sagaMiddleware.run(watchTrades);
-sagaMiddleware.run(watchMiniTicker);
+sagaMiddleware.run(watchTicker);
 sagaMiddleware.run(watchOrderBook);
 
 const App: React.FC = () => {
@@ -33,7 +33,7 @@ const App: React.FC = () => {
       <div className="App">
         <div className="layout">
           <div className="layout__header">
-            <MiniTicker />
+            <Ticker />
           </div>
           <div className="layout__2cols">  
             <div className="layout__col">

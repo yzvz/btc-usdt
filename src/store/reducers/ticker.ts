@@ -4,6 +4,8 @@ const initialState: {
   error: any,
   ws: any,
   loading: boolean,
+  priceChange: string,
+  priceChangePercent: string,
   closePrice: string,
   highPrice: string,
   lowPrice: string,
@@ -12,6 +14,8 @@ const initialState: {
   error: null,
   ws: null,
   loading: false,
+  priceChange: '',
+  priceChangePercent: '',
   closePrice: '',
   highPrice: '',
   lowPrice: '',
@@ -20,14 +24,16 @@ const initialState: {
 
 const reducer = (state = initialState, action: any) => {
   switch (action.type) {
-    case actionTypes.MINITICKER_WS_LOADING:
+    case actionTypes.TICKER_WS_LOADING:
       return { ...state, loading: true }
-    case actionTypes.MINITICKER_WS_OPEN:
+    case actionTypes.TICKER_WS_OPEN:
       return { ...state, ws: action.ws }
-    case actionTypes.MINITICKER_WS_ERROR:
+    case actionTypes.TICKER_WS_ERROR:
       return { ...state, error: action.error, loading: false };
-    case actionTypes.MINITICKER_WS_MESSAGE:
+    case actionTypes.TICKER_WS_MESSAGE:
       const { 
+        p: priceChange,
+        P: priceChangePercent,
         c: closePrice, 
         h: highPrice, 
         l: lowPrice, 
@@ -36,6 +42,8 @@ const reducer = (state = initialState, action: any) => {
 
       return { 
         ...state, 
+        priceChange,
+        priceChangePercent,
         closePrice, 
         highPrice, 
         lowPrice, 

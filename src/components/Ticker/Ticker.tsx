@@ -1,23 +1,25 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { initMiniTickerWS } from '../../store/actions/miniTicker';
+import { initTickerWS } from '../../store/actions/ticker';
 import DecimalsControl from '../DecimalsControl/DecimalsControl';
 import Error from '../Error/Error';
 import Loader from '../Loader/Loader';
 import * as utils from "../../utils";
-import styles from './MiniTicker.module.css';
+import styles from './Ticker.module.css';
 
-interface Ticker {
+interface TickerInterface {
   lastPrice: string,
   isBuyer: boolean,
   closePrice: string,
   highPrice: string,
   lowPrice: string,
   quoteVolume: string,
+  priceChange: string,
+  priceChangePercent: string,
   ws: any,
   error: Error,
   loading: boolean,
-  initMiniTickerWS: any,
+  initTickerWS: any,
   decimals: string
 }
 
@@ -25,46 +27,54 @@ function mapStateToProps(state: any) {
   return {
     lastPrice: state.tradesReducer.lastPrice,
     isBuyer: state.tradesReducer.isBuyer,
-    closePrice: state.miniTickerReducer.closePrice,
-    highPrice: state.miniTickerReducer.highPrice,
-    lowPrice: state.miniTickerReducer.lowPrice,
-    quoteVolume: state.miniTickerReducer.quoteVolume,
-    error: state.miniTickerReducer.error,
-    loading: state.miniTickerReducer.loading,
-    ws: state.miniTickerReducer.ws,
+    closePrice: state.tickerReducer.closePrice,
+    highPrice: state.tickerReducer.highPrice,
+    lowPrice: state.tickerReducer.lowPrice,
+    quoteVolume: state.tickerReducer.quoteVolume,
+    priceChange: state.tickerReducer.priceChange,
+    priceChangePercent: state.tickerReducer.priceChangePercent,
+    error: state.tickerReducer.error,
+    loading: state.tickerReducer.loading,
+    ws: state.tickerReducer.ws,
     decimals: state.commonReducer.decimals
   };
 }
 
 function mapDispatchToProps(dispatch: any) {
   return {
-    initMiniTickerWS: () => dispatch(initMiniTickerWS())
+    initTickerWS: () => dispatch(initTickerWS())
   }
 }
 
-class MiniTicker extends Component<Ticker> {
+class Ticker extends Component<TickerInterface> {
   componentDidMount() {
     if (this.props.ws === null) {
-      this.props.initMiniTickerWS();
+      this.props.initTickerWS();
     }
   }
 
   render() {
-    let miniTicker = null;
+    let ticker = null;
 
     if (this.props.loading) {
-      miniTicker = <Loader />;
+      ticker = <Loader />;
     } else if (this.props.error) {
-      miniTicker = <Error error={this.props.error} />;
+      ticker = <Error error={this.props.error} />;
     } else {
       const lastPrice = this.props.lastPrice || this.props.closePrice;
       const decimals = +this.props.decimals;
+      const { highPrice, lowPrice, quoteVolume, priceChange, priceChangePercent } = this.props;
+      const priceChangeParsed = parseFloat(priceChange);
+      const change = priceChangeParsed > 0 ? styles.positive : priceChangeParsed < 0 ? styles.negative : '';
+      const changeSign = priceChangeParsed > 0 ? '+' : '';
       const lastPriceFormatted = utils.formatPrice(lastPrice, decimals);
-      const highPriceFormatted = utils.formatPrice(this.props.highPrice, decimals);
-      const lowPriceFormatted = utils.formatPrice(this.props.lowPrice, decimals);
-      const volumeFormatted = utils.formatAmount(this.props.quoteVolume);
+      const highPriceFormatted = utils.formatPrice(highPrice, decimals);
+      const lowPriceFormatted = utils.formatPrice(lowPrice, decimals);
+      const priceChangeFormatted = utils.formatPrice(priceChange, decimals);
+      const priceChangePercentFormatted = utils.formatPercent(priceChangePercent);
+      const volumeFormatted = utils.formatAmount(quoteVolume);
 
-      miniTicker = 
+      ticker = 
         <React.Fragment>
           {lastPrice ?
             <div className={styles.entity}>
@@ -79,19 +89,27 @@ class MiniTicker extends Component<Ticker> {
               ].join(' ')}>{lastPriceFormatted}</p>
             </div>
             : null}
-          {this.props.highPrice ?
+          {priceChange ?
+            <div className={styles.entity}>
+              <p className={styles.label}>24h Change</p>
+              <p className={[styles.value, change].join(' ')}>
+                {changeSign}{priceChangeFormatted}&nbsp;&nbsp;&nbsp;{changeSign}{priceChangePercentFormatted}
+              </p>
+            </div>
+          : null}
+          {highPrice ?
             <div className={styles.entity}>
               <p className={styles.label}>24h High</p>
               <p className={styles.value}>{highPriceFormatted}</p>
             </div>
             : null}
-          {this.props.lowPrice ?
+          {lowPrice ?
             <div className={styles.entity}>
               <p className={styles.label}>24h Low</p>
               <p className={styles.value}>{lowPriceFormatted}</p>
             </div>
             : null}
-          {this.props.quoteVolume ?
+          {quoteVolume ?
             <div className={styles.entity}>
               <p className={styles.label}>24h Volume</p>
               <p className={styles.value}>{volumeFormatted} USDT</p>
@@ -104,8 +122,8 @@ class MiniTicker extends Component<Ticker> {
     }
 
     return (
-      <div className={styles.miniticker}>
-        {miniTicker}
+      <div className={styles.ticker}>
+        {ticker}
       </div>
     );
   }
@@ -114,4 +132,4 @@ class MiniTicker extends Component<Ticker> {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(MiniTicker);
+)(Ticker);
