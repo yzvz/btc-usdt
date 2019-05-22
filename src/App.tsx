@@ -11,7 +11,6 @@ import tickerReducer from './store/reducers/ticker';
 import orderBookReducer from './store/reducers/orderBook';
 import { watchTrades, watchTicker, watchOrderBook } from './store/sagas';
 import './App.css';
-import Loader from './components/Loader/Loader';
 
 const sagaMiddleware = createSagaMiddleware();
 const componseEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
