@@ -7,7 +7,7 @@ export const TRADE_RESPONSE_SAMPLE = {
   "q": "100",       // Quantity
   "b": 88,          // Buyer order ID
   "a": 50,          // Seller order ID
-  "T": 123456789,   // Trade time
+  "T": 123456785,   // Trade time
   "m": true,        // Is the buyer the market maker?
   "M": true         // Ignore
 };
