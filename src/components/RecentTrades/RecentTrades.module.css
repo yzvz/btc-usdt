@@ -1,0 +1,9 @@
+.trades {
+  position: relative;
+  background: var(--dracula);
+}
+
+.wrap {
+  height: 630px;
+  overflow: auto;
+}

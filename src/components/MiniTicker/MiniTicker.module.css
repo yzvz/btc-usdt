@@ -1,0 +1,30 @@
+.miniticker {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-between;
+  padding: .5em;
+  height: 40px;
+  background: var(--dracula);
+  color: var(--light-grey);
+}
+
+.entity {
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  margin: 0 0 .5em;
+  color: var(--grey);
+}
+
+.value {
+  margin: 0;
+  padding: 0;
+}
+
+.ask { color: var(--red); }
+.bid { color: var(--green); }

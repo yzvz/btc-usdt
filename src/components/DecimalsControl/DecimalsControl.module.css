@@ -1,0 +1,10 @@
+.control {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.label {
+  color: var(--light-grey);
+  margin-right: .25em;
+}

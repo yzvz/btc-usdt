@@ -1,0 +1,9 @@
+.orderbook {
+  background: var(--dracula);
+}
+
+.section {
+  position: relative;
+  height: 300px;
+  overflow: hidden;
+}

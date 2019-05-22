@@ -1,0 +1,19 @@
+.trends {
+  height: 30px;
+  background: var(--dark);
+  color: var(--light-grey);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  border-top: 1px solid var(--black);
+  border-bottom: 1px solid var(--black);
+}
+
+.trend {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.ask { color: var(--red); }
+.bid { color: var(--green); }

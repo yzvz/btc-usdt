@@ -1,0 +1,33 @@
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.cell {
+  padding: .25em .5em;
+  width: 33.3333%;
+  text-align: center;
+
+}
+
+.cell:hover {
+  font-weight: 700;
+}
+
+.row .cell:first-child {
+  text-align: left;
+}
+
+.row .cell:last-child {
+  text-align: right;
+}
+
+.amount, .total, .price { color: var(--light-grey); }
+.time { color: var(--grey); }
+
+.ask { color: var(--red); }
+.bid { color: var(--green); }

@@ -1,0 +1,23 @@
+.colhead {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.label {
+  padding: .25em .5em;
+  color: var(--grey);
+  width: 33.3333%;
+  text-align: center;
+}
+
+.colhead .label:first-child {
+  text-align: left;
+}
+
+.colhead .label:last-child {
+  text-align: right;
+}
+
