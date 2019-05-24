@@ -6,20 +6,20 @@ import * as actionTypes from '../actionTypes';
 
 function initWebsocket() {
   return eventChannel((emitter: any) => {
-    const ws: any = new WebSocket(ORDERBOOK_WS_URL);
+    const ws: WebSocket = new WebSocket(ORDERBOOK_WS_URL);
 
     ws.onopen = (ev: Event) => {
       utils.logger.log('Opened @orderBook WebSocket', ev);
       return emitter({ type: actionTypes.ORDERBOOK_WS_OPEN, ws });
     };
 
-    ws.onerror = (ev: ErrorEvent) => {
+    ws.addEventListener('error', (ev: any) => {
       utils.logger.error('Error at @orderBook WebSocket', ev);
       return emitter({
         type: actionTypes.ORDERBOOK_WS_ERROR,
         error: new Error('Error establishing WebSocket connection')
       });
-    };
+    });
 
     ws.onmessage = (ev: MessageEvent) => {
       let message = null;

@@ -2,19 +2,19 @@ import { MAX_BUFFERED_ASKS, MAX_BUFFERED_BIDS } from '../../constants';
 import * as actionTypes from '../actionTypes';
 
 const initialState: {
-  asks: any,
-  bids: any
-  error: any,
+  asks: any[],
+  bids: any[],
+  error: Error|null,
   loading: boolean,
-  ws: any,
-  last_u: any
+  ws: WebSocket|null,
+  last_u: number
 } = {
   asks: [],
   bids: [],
   error: null,
   loading: false,
   ws: null,
-  last_u: null
+  last_u: 0
 };
 
 const reducer = (state = initialState, action: any) => {
@@ -32,9 +32,9 @@ const reducer = (state = initialState, action: any) => {
       const { u, U } = data;
 
       // While listening to the stream, each new event's U should be equal to the previous event's u+1
-      if (U === last_u + 1 || last_u === null) {
-        a = a.filter((entry: any) => parseFloat(entry[1]) !== 0); // If the quantity is 0, remove the price level
-        b = b.filter((entry: any) => parseFloat(entry[1]) !== 0); // If the quantity is 0, remove the price level
+      if (U === last_u + 1 || last_u === 0) {
+        a = a.filter((entry: any[]) => parseFloat(entry[1]) !== 0); // If the quantity is 0, remove the price level
+        b = b.filter((entry: any[]) => parseFloat(entry[1]) !== 0); // If the quantity is 0, remove the price level
 
         return {
           ...state,

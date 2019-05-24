@@ -16,8 +16,8 @@ interface ITicker {
   quoteVolume: string;
   priceChange: string;
   priceChangePercent: string;
-  ws: any;
-  error: Error;
+  ws: WebSocket|null;
+  error: Error|null;
   loading: boolean;
   initTickerWS: any;
   decimals: string;

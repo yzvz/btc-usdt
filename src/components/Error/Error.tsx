@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './Error.module.css';
 
 interface IError {
-  error: any;
+  error: Error;
 }
 
 const Error = (props: IError) => {

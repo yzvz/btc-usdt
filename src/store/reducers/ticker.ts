@@ -1,8 +1,8 @@
 import * as actionTypes from '../actionTypes';
 
 const initialState: {
-  error: any,
-  ws: any,
+  error: Error|null,
+  ws: WebSocket|null,
   loading: boolean,
   priceChange: string,
   priceChangePercent: string,
