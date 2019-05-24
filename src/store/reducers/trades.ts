@@ -2,19 +2,19 @@ import { MAX_BUFFERED_TRADES } from '../../constants';
 import * as actionTypes from '../actionTypes';
 
 const initialState: {
-  trades: any,
-  ws: any,
-  error: any,
+  trades: any[],
+  ws: WebSocket|null,
+  error: Error|null,
   loading: boolean,
   lastPrice: string,
-  isBuyer: any
+  isBuyer: boolean
 } = {
   trades: [],
   ws: null,
   error: null,
   loading: false,
   lastPrice: '',
-  isBuyer: null
+  isBuyer: false
 };
 
 const reducer = (state = initialState, action: any) => {

@@ -5,7 +5,18 @@ import styles from './RowEntity.module.css';
 
 interface IRowEntity {
   entity: any;
+}
+
+interface IDecimals {
   decimals: string;
+}
+
+interface IEntity {
+  price: string;
+  amount: string;
+  isBuyer: boolean;
+  time: number;
+  total: string;
 }
 
 function mapStateToProps(state: any) {
@@ -14,30 +25,31 @@ function mapStateToProps(state: any) {
   };
 }
 
-function RowEntity(props: IRowEntity) {
-  const priceFormatted = utils.formatPrice(props.entity.price, +props.decimals);
-  const timeFormatted = utils.formatTime(props.entity.time);
+function RowEntity(props: IRowEntity & IDecimals) {
+  const entity: IEntity = props.entity;
+  const priceFormatted = utils.formatPrice(entity.price, +props.decimals);
+  const timeFormatted = utils.formatTime(entity.time);
 
   return (
     <div className={styles.row} tabIndex={0}>
-      {props.entity.price ? <span className={[
+      {entity.price ? <span className={[
         styles.cell,
         styles.price,
-        props.entity.isBuyer ? styles.ask : styles.bid
+        entity.isBuyer ? styles.ask : styles.bid
       ].join(' ')}>{priceFormatted}</span> : null}
       {
-        props.entity.amount
-          ? <span className={[styles.cell, styles.amount].join(' ')}>{props.entity.amount}</span>
+        entity.amount
+          ? <span className={[styles.cell, styles.amount].join(' ')}>{entity.amount}</span>
           : null
       }
       {
-        props.entity.time
+        entity.time
           ? <span className={[styles.cell, styles.time].join(' ')}>{timeFormatted}</span>
           : null
       }
       {
-        props.entity.total
-          ? <span className={[styles.cell, styles.total].join(' ')}>{props.entity.total}</span>
+        entity.total
+          ? <span className={[styles.cell, styles.total].join(' ')}>{entity.total}</span>
           : null
       }
     </div>

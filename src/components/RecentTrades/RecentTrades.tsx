@@ -8,9 +8,9 @@ import RowEntity from '../RowEntity/RowEntity';
 import styles from './RecentTrades.module.css';
 
 interface ITrades {
-  trades: any;
-  ws: any;
-  error: Error;
+  trades: any[];
+  ws: WebSocket|null;
+  error: Error|null;
   loading: boolean;
   initTradesWS: any;
 }

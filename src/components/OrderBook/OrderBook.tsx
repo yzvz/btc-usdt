@@ -10,11 +10,11 @@ import Trends from '../Trends/Trends';
 import styles from './OrderBook.module.css';
 
 interface IOrderBook {
-  ws: any;
-  error: Error;
+  ws: WebSocket|null;
+  error: Error|null;
   loading: boolean;
-  asks: any;
-  bids: any;
+  asks: any[];
+  bids: any[];
   initOrderBookWS: any;
 }
 
