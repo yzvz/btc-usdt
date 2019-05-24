@@ -1,16 +1,16 @@
 import React from 'react';
-import { createStore, combineReducers, compose, applyMiddleware } from 'redux';
-import createSagaMiddleware from 'redux-saga';
 import { Provider } from 'react-redux';
+import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
+import createSagaMiddleware from 'redux-saga';
+import './App.css';
 import OrderBook from './components/OrderBook/OrderBook';
 import RecentTrades from './components/RecentTrades/RecentTrades';
 import Ticker from './components/Ticker/Ticker';
-import tradesReducer from './store/reducers/trades';
 import commonReducer from './store/reducers/common';
-import tickerReducer from './store/reducers/ticker';
 import orderBookReducer from './store/reducers/orderBook';
-import { watchTrades, watchTicker, watchOrderBook } from './store/sagas';
-import './App.css';
+import tickerReducer from './store/reducers/ticker';
+import tradesReducer from './store/reducers/trades';
+import { watchOrderBook, watchTicker, watchTrades } from './store/sagas';
 
 const sagaMiddleware = createSagaMiddleware();
 const componseEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -34,7 +34,7 @@ const App: React.FC = () => {
           <div className="layout__header">
             <Ticker />
           </div>
-          <div className="layout__2cols">  
+          <div className="layout__2cols">
             <div className="layout__col">
               <OrderBook />
             </div>
@@ -46,6 +46,6 @@ const App: React.FC = () => {
       </div>
     </Provider>
   );
-}
+};
 
 export default App;

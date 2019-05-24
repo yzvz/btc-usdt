@@ -28,4 +28,3 @@ export {
 export {
   COMMON_SET_DECIMALS
 } from './common';
-

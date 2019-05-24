@@ -12,4 +12,4 @@ function formatAmount(amount: string): string {
   return formatter.format(parsedAmount);
 }
 
-export { formatAmount }
+export { formatAmount };

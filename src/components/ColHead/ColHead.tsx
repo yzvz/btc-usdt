@@ -1,11 +1,11 @@
 import React from 'react';
 import styles from './ColHead.module.css';
 
-interface Labels {
-  labels: any
+interface ILabels {
+  labels: any;
 }
 
-const ColHead = (props: Labels) => {
+const ColHead = (props: ILabels) => {
   return (
     <div className={styles.colhead}>
       {props.labels.map((l: any, i: number) =>

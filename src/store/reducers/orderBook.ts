@@ -1,5 +1,5 @@
-import * as actionTypes from '../actionTypes';
 import { MAX_BUFFERED_ASKS, MAX_BUFFERED_BIDS } from '../../constants';
+import * as actionTypes from '../actionTypes';
 
 const initialState: {
   asks: any,
@@ -20,13 +20,13 @@ const initialState: {
 const reducer = (state = initialState, action: any) => {
   switch (action.type) {
     case actionTypes.ORDERBOOK_WS_LOADING:
-      return { ...state, loading: true }
+      return { ...state, loading: true };
     case actionTypes.ORDERBOOK_WS_OPEN:
-      return { ...state, ws: action.ws }
+      return { ...state, ws: action.ws };
     case actionTypes.ORDERBOOK_WS_ERROR:
       return { ...state, error: action.error, loading: false };
     case actionTypes.ORDERBOOK_WS_MESSAGE:
-      let { asks, bids, last_u } = state;
+      const { asks, bids, last_u } = state;
       const { data } = action.message;
       let { a, b } = data;
       const { u, U } = data;
@@ -36,9 +36,9 @@ const reducer = (state = initialState, action: any) => {
         a = a.filter((entry: any) => parseFloat(entry[1]) !== 0); // If the quantity is 0, remove the price level
         b = b.filter((entry: any) => parseFloat(entry[1]) !== 0); // If the quantity is 0, remove the price level
 
-        return { 
-          ...state, 
-          asks: a.concat(asks).slice(0, MAX_BUFFERED_ASKS), 
+        return {
+          ...state,
+          asks: a.concat(asks).slice(0, MAX_BUFFERED_ASKS),
           bids: b.concat(bids).slice(0, MAX_BUFFERED_BIDS),
           last_u: u,
           loading: false
@@ -51,6 +51,6 @@ const reducer = (state = initialState, action: any) => {
   }
 
   return state;
-}
+};
 
 export default reducer;

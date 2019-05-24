@@ -4,7 +4,7 @@ function addZeroes(n: number): string|number {
 
 function formatTime(ms: number): string {
   const d = new Date(ms);
-  return [d.getHours(), d.getMinutes(), d.getSeconds()].map(n => addZeroes(n)).join(':');
-};
+  return [d.getHours(), d.getMinutes(), d.getSeconds()].map((n) => addZeroes(n)).join(':');
+}
 
 export { formatTime };

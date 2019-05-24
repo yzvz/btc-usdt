@@ -9,7 +9,7 @@ const initialState: {
   closePrice: string,
   highPrice: string,
   lowPrice: string,
-  quoteVolume: string,
+  quoteVolume: string
 } = {
   error: null,
   ws: null,
@@ -25,36 +25,36 @@ const initialState: {
 const reducer = (state = initialState, action: any) => {
   switch (action.type) {
     case actionTypes.TICKER_WS_LOADING:
-      return { ...state, loading: true }
+      return { ...state, loading: true };
     case actionTypes.TICKER_WS_OPEN:
-      return { ...state, ws: action.ws }
+      return { ...state, ws: action.ws };
     case actionTypes.TICKER_WS_ERROR:
       return { ...state, error: action.error, loading: false };
     case actionTypes.TICKER_WS_MESSAGE:
-      const { 
+      const {
         p: priceChange,
         P: priceChangePercent,
-        c: closePrice, 
-        h: highPrice, 
-        l: lowPrice, 
-        q: quoteVolume 
+        c: closePrice,
+        h: highPrice,
+        l: lowPrice,
+        q: quoteVolume
       } = action.message.data;
 
-      return { 
-        ...state, 
+      return {
+        ...state,
         priceChange,
         priceChangePercent,
-        closePrice, 
-        highPrice, 
-        lowPrice, 
-        quoteVolume, 
-        loading: false 
+        closePrice,
+        highPrice,
+        lowPrice,
+        quoteVolume,
+        loading: false
       };
     default:
       break;
   }
 
   return state;
-}
+};
 
 export default reducer;

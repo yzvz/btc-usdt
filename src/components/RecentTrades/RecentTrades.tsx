@@ -1,19 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { initTradesWS } from '../../store/actions/trade';
-import RowEntity from '../RowEntity/RowEntity';
 import ColHead from '../ColHead/ColHead';
 import Error from '../Error/Error';
 import Loader from '../Loader/Loader';
+import RowEntity from '../RowEntity/RowEntity';
 import styles from './RecentTrades.module.css';
 
-interface Trades {
-  trades: any,
-  ws: any,
-  error: Error,
-  loading: boolean,
-  initTradesWS: any
-};
+interface ITrades {
+  trades: any;
+  ws: any;
+  error: Error;
+  loading: boolean;
+  initTradesWS: any;
+}
 
 function mapStateToProps(state: any) {
   return {
@@ -30,14 +30,14 @@ function mapDispatchToProps(dispatch: any) {
   };
 }
 
-class RecentTrades extends Component<Trades> {
-  componentDidMount() {
+class RecentTrades extends Component<ITrades> {
+  public componentDidMount() {
     if (this.props.ws === null) {
       this.props.initTradesWS();
     }
   }
 
-  render() {
+  public render() {
     let trades = null;
 
     if (this.props.loading) {
@@ -45,7 +45,7 @@ class RecentTrades extends Component<Trades> {
     } else if (this.props.error) {
       trades = <Error error={this.props.error} />;
     } else {
-      trades = 
+      trades =
         <div className={styles.entries}>
           {this.props.trades.map((t: any) =>
             <RowEntity key={t.t} entity={{

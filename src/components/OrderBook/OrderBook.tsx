@@ -1,21 +1,21 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { initOrderBookWS } from '../../store/actions/orderBook';
-import RowEntity from '../RowEntity/RowEntity';
+import * as utils from '../../utils';
 import ColHead from '../ColHead/ColHead';
-import Trends from '../Trends/Trends';
 import Error from '../Error/Error';
 import Loader from '../Loader/Loader';
-import * as utils from "../../utils";
+import RowEntity from '../RowEntity/RowEntity';
+import Trends from '../Trends/Trends';
 import styles from './OrderBook.module.css';
 
-interface OrderB {
-  ws: any,
-  error: Error,
-  loading: boolean,
-  asks: any,
-  bids: any,
-  initOrderBookWS: any
+interface IOrderBook {
+  ws: any;
+  error: Error;
+  loading: boolean;
+  asks: any;
+  bids: any;
+  initOrderBookWS: any;
 }
 
 function mapStateToProps(state: any) {
@@ -31,17 +31,17 @@ function mapStateToProps(state: any) {
 function mapDispatchToProps(dispatch: any) {
   return {
     initOrderBookWS: () => dispatch(initOrderBookWS())
-  }
+  };
 }
 
-class OrderBook extends Component<OrderB> {
-  componentDidMount() {
+class OrderBook extends Component<IOrderBook> {
+  public componentDidMount() {
     if (this.props.ws === null) {
       this.props.initOrderBookWS();
     }
   }
 
-  render() {
+  public render() {
     let asks = null;
     let bids = null;
 

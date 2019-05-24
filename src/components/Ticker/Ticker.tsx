@@ -1,26 +1,26 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { initTickerWS } from '../../store/actions/ticker';
+import * as utils from '../../utils';
 import DecimalsControl from '../DecimalsControl/DecimalsControl';
 import Error from '../Error/Error';
 import Loader from '../Loader/Loader';
-import * as utils from "../../utils";
 import styles from './Ticker.module.css';
 
-interface TickerInterface {
-  lastPrice: string,
-  isBuyer: boolean,
-  closePrice: string,
-  highPrice: string,
-  lowPrice: string,
-  quoteVolume: string,
-  priceChange: string,
-  priceChangePercent: string,
-  ws: any,
-  error: Error,
-  loading: boolean,
-  initTickerWS: any,
-  decimals: string
+interface ITicker {
+  lastPrice: string;
+  isBuyer: boolean;
+  closePrice: string;
+  highPrice: string;
+  lowPrice: string;
+  quoteVolume: string;
+  priceChange: string;
+  priceChangePercent: string;
+  ws: any;
+  error: Error;
+  loading: boolean;
+  initTickerWS: any;
+  decimals: string;
 }
 
 function mapStateToProps(state: any) {
@@ -43,17 +43,17 @@ function mapStateToProps(state: any) {
 function mapDispatchToProps(dispatch: any) {
   return {
     initTickerWS: () => dispatch(initTickerWS())
-  }
+  };
 }
 
-class Ticker extends Component<TickerInterface> {
-  componentDidMount() {
+class Ticker extends Component<ITicker> {
+  public componentDidMount() {
     if (this.props.ws === null) {
       this.props.initTickerWS();
     }
   }
 
-  render() {
+  public render() {
     let ticker = null;
 
     if (this.props.loading) {
@@ -74,7 +74,7 @@ class Ticker extends Component<TickerInterface> {
       const priceChangePercentFormatted = utils.formatPercent(priceChangePercent);
       const volumeFormatted = utils.formatAmount(quoteVolume);
 
-      ticker = 
+      ticker =
         <React.Fragment>
           {lastPrice ?
             <div className={styles.entity}>
