@@ -1,8 +1,4 @@
-function formatPrice(price: string|number, digits?: number|undefined): string {
-  if (digits === undefined) {
-    digits = 2;
-  }
-
+function formatPrice(price: string | number, digits: number = 2): string {
   if (typeof price === 'number') {
     price = price.toString();
   }

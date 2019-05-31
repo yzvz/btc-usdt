@@ -1,4 +1,4 @@
-function addZeroes(n: number): string|number {
+function addZeroes(n: number): string | number {
   return n < 10 ? '0' + n : n;
 }
 
