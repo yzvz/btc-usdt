@@ -1,8 +1,9 @@
+import { Reducer } from 'redux';
 import * as actionTypes from '../actionTypes';
 
 const initialState: {
-  error: Error|null,
-  ws: WebSocket|null,
+  error: Error | null,
+  ws: WebSocket | null,
   loading: boolean,
   priceChange: string,
   priceChangePercent: string,
@@ -22,7 +23,7 @@ const initialState: {
   quoteVolume: ''
 };
 
-const reducer = (state = initialState, action: any) => {
+const reducer: Reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.TICKER_WS_LOADING:
       return { ...state, loading: true };

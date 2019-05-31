@@ -1,3 +1,4 @@
+import { Reducer } from 'redux';
 import * as actionTypes from '../actionTypes';
 
 const initialState: {
@@ -6,7 +7,7 @@ const initialState: {
   decimals: '2'
 };
 
-const reducer = (state = initialState, action: any) => {
+const reducer: Reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.COMMON_SET_DECIMALS:
       return { ...state, decimals: action.decimals };

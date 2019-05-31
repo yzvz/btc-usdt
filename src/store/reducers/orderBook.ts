@@ -1,12 +1,13 @@
+import { Reducer } from 'redux';
 import { MAX_BUFFERED_ASKS, MAX_BUFFERED_BIDS } from '../../constants';
 import * as actionTypes from '../actionTypes';
 
 const initialState: {
   asks: any[],
   bids: any[],
-  error: Error|null,
+  error: Error | null,
   loading: boolean,
-  ws: WebSocket|null,
+  ws: WebSocket | null,
   last_u: number
 } = {
   asks: [],
@@ -17,7 +18,7 @@ const initialState: {
   last_u: 0
 };
 
-const reducer = (state = initialState, action: any) => {
+const reducer: Reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.ORDERBOOK_WS_LOADING:
       return { ...state, loading: true };

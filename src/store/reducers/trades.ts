@@ -1,10 +1,11 @@
+import { Reducer } from 'redux';
 import { MAX_BUFFERED_TRADES } from '../../constants';
 import * as actionTypes from '../actionTypes';
 
 const initialState: {
   trades: any[],
-  ws: WebSocket|null,
-  error: Error|null,
+  ws: WebSocket | null,
+  error: Error | null,
   loading: boolean,
   lastPrice: string,
   isBuyer: boolean
@@ -17,7 +18,7 @@ const initialState: {
   isBuyer: false
 };
 
-const reducer = (state = initialState, action: any) => {
+const reducer: Reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.TRADES_WS_LOADING:
       return { ...state, loading: true };
