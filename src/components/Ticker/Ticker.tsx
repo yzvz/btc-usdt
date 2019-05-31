@@ -16,8 +16,8 @@ interface ITicker {
   quoteVolume: string;
   priceChange: string;
   priceChangePercent: string;
-  ws: WebSocket|null;
-  error: Error|null;
+  ws: WebSocket | null;
+  error: Error | null;
   loading: boolean;
   initTickerWS: any;
   decimals: string;
@@ -96,7 +96,7 @@ class Ticker extends Component<ITicker> {
                 {changeSign}{priceChangeFormatted}&nbsp;&nbsp;&nbsp;{changeSign}{priceChangePercentFormatted}
               </p>
             </div>
-          : null}
+            : null}
           {highPrice ?
             <div className={styles.entity}>
               <p className={styles.label}>24h High</p>

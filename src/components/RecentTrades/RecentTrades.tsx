@@ -9,8 +9,8 @@ import styles from './RecentTrades.module.css';
 
 interface ITrades {
   trades: any[];
-  ws: WebSocket|null;
-  error: Error|null;
+  ws: WebSocket | null;
+  error: Error | null;
   loading: boolean;
   initTradesWS: any;
 }

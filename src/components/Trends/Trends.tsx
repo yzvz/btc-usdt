@@ -24,15 +24,15 @@ const Trends = (props: ITrends) => {
   const lastPriceFormatted = utils.formatPrice(lastPrice, +props.decimals);
 
   const trends = lastPrice ? <React.Fragment>
-      <span className={[
-        styles.trend,
-        props.isBuyer === true
-          ? styles.ask
-          : props.isBuyer === false
-            ? styles.bid
-            : ''
-        ].join(' ')}>{lastPriceFormatted}</span>
-    </React.Fragment> : null;
+    <span className={[
+      styles.trend,
+      props.isBuyer === true
+        ? styles.ask
+        : props.isBuyer === false
+          ? styles.bid
+          : ''
+    ].join(' ')}>{lastPriceFormatted}</span>
+  </React.Fragment> : null;
 
   return (
     <div className={styles.trends}>{trends}</div>
